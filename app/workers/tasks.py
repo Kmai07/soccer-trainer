@@ -39,7 +39,7 @@ drill_context = {
     }
 }
 
-
+""""
 @celery.task
 def analyze_submission(submission_id: str, video_path: str):
     import asyncio
@@ -48,7 +48,24 @@ def analyze_submission(submission_id: str, video_path: str):
     try:
         loop.run_until_complete(_analyze(submission_id, video_path))
     finally:
+        loop.close()"""
+
+@celery.task
+def analyze_submission(submission_id: str, video_path: str):
+    import asyncio
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_closed():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    try:
+        loop.run_until_complete(_analyze(submission_id, video_path))
+    finally:
         loop.close()
+        asyncio.set_event_loop(asyncio.new_event_loop())
 
 
 async def _analyze(submission_id: str, video_path: str):
