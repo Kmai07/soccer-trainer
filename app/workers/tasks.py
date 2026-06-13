@@ -82,7 +82,7 @@ Respond with valid JSON only. No markdown, no explanation, just the JSON object.
 
             client = OpenAI(
                 base_url=settings.LLM_BASE_URL,
-                api_key="ollama"
+                api_key=settings.OPENAI_API_KEY
             )
             response = client.chat.completions.create(
                 model=settings.LLM_MODEL,

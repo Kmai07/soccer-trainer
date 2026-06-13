@@ -1,0 +1,132 @@
+.history__header {
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.history__title {
+  margin: 0 0 6px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+}
+
+.history__subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.history__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 20px;
+  color: var(--color-text-muted);
+}
+
+.history__empty {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.history__empty-title {
+  margin: 0 0 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.history__empty-text {
+  margin: 0 0 20px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.history__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.history-card {
+  text-align: left;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.history-card--clickable {
+  cursor: pointer;
+}
+
+.history-card--clickable:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.history-card--clickable:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.history-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.history-card__drill {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.history-card__status {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-radius: 999px;
+}
+
+.history-card__status--completed {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.history-card__status--processing {
+  color: #eab308;
+  background: rgba(234, 179, 8, 0.15);
+}
+
+.history-card__status--failed {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.history-card__status--pending {
+  color: #94a3b8;
+  background: rgba(100, 116, 139, 0.2);
+}
+
+.history-card__date {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.history-card__hint {
+  margin: 10px 0 0;
+  font-size: 0.8rem;
+  color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .history__grid {
+    grid-template-columns: 1fr;
+  }
+}

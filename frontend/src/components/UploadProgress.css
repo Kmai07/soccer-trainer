@@ -1,0 +1,51 @@
+.upload-progress {
+  margin-top: 4px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  animation: upload-progress-enter 0.25s ease;
+}
+
+@keyframes upload-progress-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.upload-progress__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.upload-progress__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.upload-progress__percent {
+  font-size: 0.8rem;
+  color: var(--color-accent);
+}
+
+.upload-progress__track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.upload-progress__bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-accent);
+  transition: width 0.2s ease;
+}

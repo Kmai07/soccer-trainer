@@ -1,0 +1,72 @@
+.upload-page__card {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.upload-page__header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.upload-page__title {
+  margin: 0 0 8px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+}
+
+.upload-page__subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.upload-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.upload-page__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-page__select {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.upload-page__select:hover:not(:disabled) {
+  border-color: var(--color-accent);
+}
+
+.upload-page__select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-muted);
+}
+
+.upload-page__select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.upload-page__submit {
+  margin-top: 4px;
+}

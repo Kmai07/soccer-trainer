@@ -23,11 +23,11 @@ export const authAPI = {
 }
 
 export const submissionsAPI = {
-  create: (file, drillType) => {
+  create: (file, drillType, config = {}) => {
     const form = new FormData()
     form.append('file', file)
     form.append('drill_type', drillType)
-    return api.post('/submissions', form)
+    return api.post('/submissions', form, config)
   },
   list: () => api.get('/submissions'),
   getAnalysis: (id) => api.get(`/submissions/${id}/analysis`),

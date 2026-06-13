@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     AWS_BUCKET_NAME: str
     LLM_BASE_URL: str
     LLM_MODEL: str = "llama3.2"
-
+    OPENAI_API_KEY: str = ""
     model_config = SettingsConfigDict(env_file=".env")
 
 settings = Settings()
