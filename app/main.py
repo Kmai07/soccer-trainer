@@ -11,7 +11,8 @@ def create_app() -> FastAPI:
         allow_origins=[
             "http://localhost:5173",
             "https://soccer-trainer-flax.vercel.app",
-            "https://*.vercel.app"               
+            "https://soccer-trainer-git-main-kmai07s-projects.vercel.app",
+            "https://*.vercel.app"
         ],
         allow_credentials=True,
         allow_methods=["*"],
