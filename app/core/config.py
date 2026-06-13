@@ -8,8 +8,8 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     AWS_BUCKET_NAME: str
-    LLM_BASE_URL: str
-    LLM_MODEL: str = "llama3.2"
+    LLM_BASE_URL: str = "https://generativelanguage.googleapis.com/v1beta/openai"
+    LLM_MODEL: str = "gemini-1.5-flash"
     OPENAI_API_KEY: str = ""
     model_config = SettingsConfigDict(env_file=".env")
 
