@@ -12,5 +12,8 @@ class Settings(BaseSettings):
     LLM_MODEL: str = "gemini-2.5-flash"
     OPENAI_API_KEY: str = ""
     model_config = SettingsConfigDict(env_file=".env")
+    CLOUDINARY_CLOUD_NAME: str = ""
+    CLOUDINARY_API_KEY: str = ""
+    CLOUDINARY_API_SECRET: str = ""
 
 settings = Settings()

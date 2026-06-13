@@ -1,5 +1,5 @@
 from app.workers.celery_app import celery
-from app.utils.video import extract_frames, get_video_duration
+from app.utils.video import extract_frames, get_video_duration, download_video
 from app.utils.pose import extract_pose_landmarks, compute_metrics
 from app.db.session import AsyncSessionLocal
 from app.repositories.submission import SubmissionRepository
@@ -8,6 +8,9 @@ from app.models.submission import SubmissionStatus
 from openai import OpenAI
 from app.core.config import settings
 import json
+import uuid
+import tempfile
+import os
 
 drill_context = {
     "free_kick": {
@@ -59,8 +62,13 @@ async def _analyze(submission_id: str, video_path: str):
         )
 
         try:
-            frames = extract_frames(video_path)
-            duration = get_video_duration(video_path)
+            with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as tmp:
+                tmp_path = tmp.name
+            download_video(video_path, tmp_path)
+            frames = extract_frames(tmp_path)
+            duration = get_video_duration(tmp_path)
+            os.unlink(tmp_path)
+
             landmarks = extract_pose_landmarks(frames)
             metrics = compute_metrics(landmarks)
 
@@ -94,8 +102,7 @@ Respond with valid JSON only. No markdown, no explanation, just the JSON object.
                 messages=[{"role": "user", "content": prompt}]
             )
 
-            raw = response.choices[0].message.content
-            raw = raw.strip()
+            raw = response.choices[0].message.content.strip()
             if raw.startswith("```"):
                 raw = raw.split("```")[1]
                 if raw.startswith("json"):

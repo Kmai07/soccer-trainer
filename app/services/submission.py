@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.submission import SubmissionRepository
 from app.models.user import User
 from app.workers.tasks import analyze_submission
+from app.utils.video import upload_video
 
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
@@ -18,7 +19,7 @@ class SubmissionService:
         self.repo = SubmissionRepository(db)
 
     async def create_submission(
-    self, file: UploadFile, drill_type: str, user: User
+        self, file: UploadFile, drill_type: str, user: User
     ):
         extension = Path(file.filename).suffix.lower()
         if extension not in ALLOWED_EXTENSIONS:
@@ -41,13 +42,16 @@ class SubmissionService:
                 detail="File too large. Maximum size is 50MB"
             )
 
+        cloudinary_url = upload_video(str(file_path))
+        file_path.unlink()
+
         submission = await self.repo.create(
             user_id=user.id,
             drill_type=drill_type,
-            s3_key=str(file_path)
+            s3_key=cloudinary_url
         )
         print(f"Dispatching task for submission {submission.id}")
-        analyze_submission.delay(str(submission.id), str(file_path))
+        analyze_submission.delay(str(submission.id), cloudinary_url)
         print("Task dispatched")
         return submission
 
