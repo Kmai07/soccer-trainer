@@ -40,7 +40,12 @@ drill_context = {
 @celery.task
 def analyze_submission(submission_id: str, video_path: str):
     import asyncio
-    asyncio.run(_analyze(submission_id, video_path))
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        loop.run_until_complete(_analyze(submission_id, video_path))
+    finally:
+        loop.close()
 
 
 async def _analyze(submission_id: str, video_path: str):
