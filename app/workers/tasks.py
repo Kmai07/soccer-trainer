@@ -78,7 +78,7 @@ Respond with valid JSON only containing:
         feedback = json.loads(raw.strip())
 
         db.execute(
-            text("INSERT INTO analysis_results (id, submission_id, metrics, feedback, overall_score) VALUES (:id, :sid, :metrics::json, :feedback::json, :score)"),
+            text("INSERT INTO analysis_results (id, submission_id, metrics, feedback, overall_score) VALUES (:id, :sid, CAST(:metrics AS json), CAST(:feedback AS json), :score)"),
             {
                 "id": str(uuid.uuid4()),
                 "sid": submission_id,
